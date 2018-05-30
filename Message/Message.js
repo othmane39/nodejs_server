@@ -1,5 +1,5 @@
 var mongoose = require('mongoose');
-var user_schema = require('../User/User');
+var user_schema = require('../User/User')._schema;
 
 var message_schema = new mongoose.Schema({
   sender: user_schema,
@@ -9,4 +9,7 @@ var message_schema = new mongoose.Schema({
   state: String
 });
 
-module.exports = message_schema;
+
+mongoose.model('Message', message_schema);
+
+module.exports = {_schema: message_schema, model: mongoose.model('Message')};

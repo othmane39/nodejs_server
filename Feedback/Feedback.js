@@ -8,4 +8,7 @@ var feedback_schema = new mongoose.Schema({
   picked: Boolean
 });
 
-module.exports = feedback_schema;
+
+mongoose.model('Feedback', feedback_schema);
+
+module.exports = {_schema: feedback_schema, model: mongoose.model('Feedback')};

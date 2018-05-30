@@ -1,5 +1,5 @@
 var mongoose = require('mongoose');
-var adress_schema = require('../Adress/Adress')
+var adress_schema = require('../Adress/Adress')._schema
 
 var school_schema = new mongoose.Schema({
   id: Number,
@@ -11,6 +11,6 @@ var school_schema = new mongoose.Schema({
   },
   adress: adress_schema
 });
+mongoose.model('School', school_schema);
 
-
-module.exports = school_schema;
+module.exports = {_schema: school_schema, model: mongoose.model('School')};

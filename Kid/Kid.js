@@ -1,6 +1,6 @@
 var mongoose = require('mongoose');
-var user_schema = require('../User/User');
-var school_schema = require('../School/School');
+var user_schema = require('../User/User')._schema;
+var school_schema = require('../School/School')._schema;
 
 var kid_schema = new mongoose.Schema({
   name: String,
@@ -11,6 +11,6 @@ var kid_schema = new mongoose.Schema({
   school: school_schema
 });
 
+mongoose.model('Kid', kid_schema);
 
-
-module.exports = kid_schema;
+module.exports = {_schema: kid_schema, model: mongoose.model('Kid')};

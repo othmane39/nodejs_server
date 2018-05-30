@@ -1,10 +1,11 @@
 var mongoose = require('mongoose');
-var adress_schema = require('../Adress/Adress');
-var feedback_schema = require('../Feedback/Feedback');
-var document_schema = require('../Document/Document');
+var adress_schema = require('../Adress/Adress')._schema;
+var feedback_schema = require('../Feedback/Feedback')._schema;
+var document_schema = require('../Document/Document')._schema;
+
 
 var user_schema = new mongoose.Schema({
-  id: Number,
+
   first_name: String,
   last_name: String,
   email: String,
@@ -27,7 +28,8 @@ var user_schema = new mongoose.Schema({
   },
   feedbacks: [feedback_schema],
   documents: [document_schema]
+
 });
 mongoose.model('User', user_schema);
 
-module.exports = mongoose.model('User');
+module.exports = {_schema: user_schema, model: mongoose.model('User')};

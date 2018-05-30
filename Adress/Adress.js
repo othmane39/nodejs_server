@@ -16,4 +16,6 @@ var adress_schema = new mongoose.Schema({
 });
 
 
-module.exports = adress_schema;
+mongoose.model('Adress', adress_schema);
+
+module.exports = {_schema: adress_schema, model: mongoose.model('Adress')};

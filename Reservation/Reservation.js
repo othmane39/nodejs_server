@@ -1,6 +1,6 @@
 var mongoose = require('mongoose');
-var adress_schema = require('../Adress/Adress');
-var user_schema = require('../User/User');
+var adress_schema = require('../Adress/Adress')._schema;
+var user_schema = require('../User/User')._schema;
 
 var reservation_schema = new mongoose.Schema({
   adress_picked: adress_schema,
@@ -11,4 +11,6 @@ var reservation_schema = new mongoose.Schema({
 });
 
 
-module.exports = reservation_schema;
+mongoose.model('Reservation', reservation_schema);
+
+module.exports = {_schema: reservation_schema, model: mongoose.model('Reservation')};

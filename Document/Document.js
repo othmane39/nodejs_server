@@ -8,4 +8,6 @@ var document_schema = new mongoose.Schema({
 });
 
 
-module.exports = document_schema;
+mongoose.model('Document', document_schema);
+
+module.exports = {_schema: document_schema, model: mongoose.model('Document')};
