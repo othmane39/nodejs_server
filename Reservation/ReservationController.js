@@ -20,7 +20,7 @@ router.get('/:id', verify_token, function(req, res) {
     if (err) return res.status(500).send("There was a problem finding the pickup.");
     if (!pickup) return res.status(404).send("No pickup found.");
 
-    if (knife.length_json_array(pickup.reservations) < 1) return res.status(400).send("No more places");
+    if (pickup.reservations.length >= pickup.nb_place) return res.status(400).send("No more places");
 
     user.model.findById(req.userId, function(err, user) {
       if (err) return res.status(500).send("There was a problem finding the user.");
@@ -47,7 +47,7 @@ router.get('/:id', verify_token, function(req, res) {
             $push: {
               reservations: reservation
             }
-          },{
+          }, {
             new: true
           }, function(err, pickup) {
             if (err) return res.status(500).send("There was a problem updating the pickup.");
@@ -57,6 +57,25 @@ router.get('/:id', verify_token, function(req, res) {
       })
     })
   })
+});
+
+router.delete('/:id', verify_token, function(req, res) {
+
+  pickup_model.findOne(req.params.id, function(err, pickup) {
+    if (err) return res.status(500).send("There was a problem finding the pickup.");
+    if (!pickup) return res.status(404).send("No pickup found.");
+
+    for (var i = 0; i < pickup.reservations.length; i++) {
+      if (pickup.reservations[i].user_picked._id == req.userId) {
+        pickup.reservations[i].remove(function(err) {
+          if (err) return res.status(500).send("There was a problem while removing the reservation.");
+
+          //send push notification to picker
+          res.status(200).send("Reservation canceled");
+        });
+      }
+    }
+  });
 });
 
 module.exports = router;
