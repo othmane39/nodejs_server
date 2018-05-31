@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 var bodyParser = require('body-parser');
 
-var VerifyToken = require('./VerifyToken');
+var verify_token = require('./VerifyToken');
 var verify_email = require('./AuthHelper').verify_email;
 
 router.use(bodyParser.urlencoded({
@@ -51,7 +51,7 @@ router.post('/login', function(req, res) {
 
 });
 
-router.get('/logout', function(req, res) {
+router.get('/logout', verify_token, function(req, res) {
   res.status(200).send({
     auth: false,
     token: null
@@ -91,7 +91,7 @@ router.post('/register', verify_email, function(req, res, next) {
 
 });
 
-router.get('/me', VerifyToken, function(req, res, next) {
+router.get('/me', verify_token, function(req, res, next) {
 
   user_model.findById(req.userId, {
     password: 0

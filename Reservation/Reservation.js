@@ -7,7 +7,8 @@ var reservation_schema = new mongoose.Schema({
   user_picked: user_schema,
   detour_km: Number,
   created_at: Date,
-  state: String
+  state: String,
+  feedback_state: String
 });
 
 

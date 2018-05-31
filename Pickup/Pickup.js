@@ -12,7 +12,8 @@ var pickup_schema = new mongoose.Schema({
   picker: user_schema,
   school: school_schema,
   start_adress: adress_schema,
-  reservations: [ reservation_schema ]
+  reservations: [ reservation_schema ],
+  state: String
 });
 
 
