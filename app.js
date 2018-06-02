@@ -17,6 +17,9 @@ app.use('/user', user_controller);
 var conversation_controller = require('./Conversation/ConversationController');
 app.use('/conversation', conversation_controller);
 
+var feedback_controller = require('./Feedback/FeedbackController');
+app.use('/feedback', feedback_controller);
+
 
 
 module.exports = app;
