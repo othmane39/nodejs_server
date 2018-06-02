@@ -12,7 +12,10 @@ var reservation_controller = require('./Reservation/ReservationController');
 app.use('/reserve', reservation_controller);
 
 var user_controller = require('./User/UserController');
-app.use('/users', user_controller);
+app.use('/user', user_controller);
+
+var conversation_controller = require('./Conversation/ConversationController');
+app.use('/conversation', conversation_controller);
 
 
 

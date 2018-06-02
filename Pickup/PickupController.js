@@ -8,3 +8,8 @@ router.use(bodyParser.json());
 
 var pickup_model = require('./Pickup').model;
 var verify_token = require('../auth/VerifyToken');
+
+
+router.get('/', verify_token, function(req, res){
+  
+});

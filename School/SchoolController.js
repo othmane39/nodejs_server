@@ -10,7 +10,7 @@ var school_model = require('./School').model;
 var verify_token = require('../auth/VerifyToken');
 
 
-router.get('/', verify_token, function(req, res) {
+router.get('/', verify_token, function(req, res, next) {
 
   school_model.find({}, function(err, schools) {
     if (err) return res.status(500).send("There was a problem finding the schools");
@@ -19,7 +19,7 @@ router.get('/', verify_token, function(req, res) {
 
 });
 
-router.get('/:id', verify_token, function(req, res) {
+router.get('/:id', verify_token, function(req, res, next) {
 
   school_model.findById(req.params.id, function(err, school) {
     if (err) return res.status(500).send("There was a problem finding the school.");

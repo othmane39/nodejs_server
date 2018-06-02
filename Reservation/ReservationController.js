@@ -9,8 +9,9 @@ router.use(bodyParser.json());
 
 var reservation_model = require('./Reservation').model;
 var pickup_model = require('../Pickup/Pickup').model;
-var verify_token = require('../auth/VerifyToken');
 var user_model = require('../User/User').model;
+var verify_token = require('../auth/VerifyToken');
+
 
 
 //Reserve pickup id
@@ -40,8 +41,8 @@ router.get('/:id', verify_token, function(req, res) {
           state: "waiting",
           feedback_state: "not_yet"
         }, function(err, reservation) {
-          if (err) return res.status(500).send("There was a problem finding the adress.");
-          if (!adress) return res.status(404).send("No adress found.");
+          if (err) return res.status(500).send("There was a problem finding the reservation.");
+          if (!adress) return res.status(404).send("No reservation found.");
 
           pickup_model.findByIdAndUpdate(pickup.id, {
             $push: {
@@ -59,6 +60,7 @@ router.get('/:id', verify_token, function(req, res) {
   })
 });
 
+//cancel reservation pickup id
 router.delete('/:id', verify_token, function(req, res) {
 
   pickup_model.findOne(req.params.id, function(err, pickup) {
