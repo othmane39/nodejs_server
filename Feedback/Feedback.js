@@ -4,7 +4,7 @@ var user_schema = require('../User/User')._schema;
 var feedback_schema = new mongoose.Schema({
   note: { type:Number, min:0, max: 5},
   comment: String,
-  user_poster: user_schema._id,
+  user_poster_id: String,
   picked: Boolean
 });
 

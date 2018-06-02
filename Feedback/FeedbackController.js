@@ -51,11 +51,11 @@ router.post('/:id', verify_token, function(req, res) {
     feedback_model.create({
       note: req.body.note,
       comment: req.body.comment,
-      user_poster: req.userId,
+      user_poster_id: req.userId,
       picked: 'yes'
     }, function(err, feedback) {
       if (err) return res.status(500).send("Error in sending feedback");
-      user_model.findByIdAndUpdate(pickup.picker._id, {
+      user_model.findByIdAndUpdate(pickup.picker_id, {
         $push: {
           feedbacks: feedback
         }

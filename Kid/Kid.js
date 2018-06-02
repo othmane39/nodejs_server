@@ -7,10 +7,11 @@ var kid_schema = new mongoose.Schema({
   year_birthday: Number,
   photo_path: String,
   keygen_kid: String,
-  parent: [ user_schema ],
+  parent_id: [ String ],
   school: school_schema
 });
 
 mongoose.model('Kid', kid_schema);
 
 module.exports = {_schema: kid_schema, model: mongoose.model('Kid')};
+;

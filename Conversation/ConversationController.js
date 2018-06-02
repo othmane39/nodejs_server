@@ -25,8 +25,8 @@ router.post('/:id', verify_token, function(req, res, next) {
     if (err) return res.status(500).send("There was a problem sending the message");
 
     message_model.create({
-      sender: req.userId,
-      receiver: req.params.id,
+      sender_id: req.userId,
+      receiver_id: req.params.id,
       content: req.body.content,
       date: new Date(),
       status: 'unread'
@@ -35,8 +35,8 @@ router.post('/:id', verify_token, function(req, res, next) {
 
       if (!conversation) {
         conversation_model.create({
-          user1: req.userId,
-          user2: req.params.Id,
+          user1_id: req.userId,
+          user2_id: req.params.Id,
           contents: [message],
           state_user1: 'display',
           state_user2: 'display'
@@ -63,9 +63,9 @@ router.post('/:id', verify_token, function(req, res, next) {
 router.get('/', verify_token, function(req, res, next) {
   conversation_model.find({
     $or: [{
-      user1: req.userId
+      user1_id: req.userId
     }, {
-      user2: req.userId
+      user2_id: req.userId
     }]
   }, function(err, conversation) {
     if (err) return res.status(500).send("There was problem getting your conversations");
@@ -78,7 +78,7 @@ router.get('/:id', verify_token, function(req, res, next) {
   conversation_model.findById(req.params.id, function(err, conversation) {
     if (err) return res.status(500).send("There was problem getting your conversation");
     if (!conversation) return res.status(400).send("No conversation found");
-    if (!((conversation.user1 == req.userId) || (conversation.user2 == req.userId)))
+    if (!((conversation.user1_id == req.userId) || (conversation.user2_id == req.userId)))
       return res.status(400).send("Not your conversation");
     res.status(200).send(conversation);
   });

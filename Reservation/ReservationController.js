@@ -35,7 +35,7 @@ router.get('/:id', verify_token, function(req, res) {
 
         reservation_model.create({
           adress_picked: adress,
-          user_picked: user,
+          user_picked_id: user._id,
           detour_km: 0,
           created_at: new Date(),
           state: "waiting",
@@ -68,7 +68,7 @@ router.delete('/:id', verify_token, function(req, res) {
     if (!pickup) return res.status(404).send("No pickup found.");
 
     for (var i = 0; i < pickup.reservations.length; i++) {
-      if (pickup.reservations[i].user_picked._id == req.userId) {
+      if (pickup.reservations[i].user_picked_id == req.userId) {
         pickup.reservations[i].remove(function(err) {
           if (err) return res.status(500).send("There was a problem while removing the reservation.");
 

@@ -2,8 +2,8 @@ var mongoose = require('mongoose');
 var user_schema = require('../User/User')._schema;
 
 var message_schema = new mongoose.Schema({
-  sender: user_schema,
-  receiver: user_schema,
+  sender_id: String,
+  receiver_id: String,
   content: String,
   date: Date,
   state: String

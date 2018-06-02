@@ -4,7 +4,7 @@ var user_schema = require('../User/User')._schema;
 
 var reservation_schema = new mongoose.Schema({
   adress_picked: adress_schema,
-  user_picked: user_schema,
+  user_picked_id: String,
   detour_km: Number,
   created_at: Date,
   state: String,
@@ -15,3 +15,4 @@ var reservation_schema = new mongoose.Schema({
 mongoose.model('Reservation', reservation_schema);
 
 module.exports = {_schema: reservation_schema, model: mongoose.model('Reservation')};
+;
