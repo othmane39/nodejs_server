@@ -1,6 +1,7 @@
 var mongoose = require('mongoose');
 
 var adress_schema = new mongoose.Schema({
+  tag: String,
   numero: Number,
   name: String,
   postal_code: {

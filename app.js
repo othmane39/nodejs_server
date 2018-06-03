@@ -23,4 +23,7 @@ app.use('/feedback', feedback_controller);
 var kid_controller = require('./Kid/KidController');
 app.use('/kid', kid_controller);
 
+var adress_controller = require('./Adress/AdressController');
+app.use('/adress', adress_controller);
+
 module.exports = app;

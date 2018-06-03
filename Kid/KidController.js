@@ -54,12 +54,14 @@ router.put('/:id', verify_token, function(req, res, next) {
   });
 });
 
-router.delete('/:id', verify_token, function(req, res, next){
-  kid_model.findByIdAndRemove({_id: req.params.id,
-  parents_id: req.userId}, function(err, kid) {
+router.delete('/:id', verify_token, function(req, res, next) {
+  kid_model.findByIdAndRemove({
+    _id: req.params.id,
+    parents_id: req.userId
+  }, function(err, kid) {
     if (err) return res.status(500).send("error deleting kid");
     res.status(200).send("The kid " + kid.name + "was deleted");
-  })
-})
+  });
+});
 
 module.exports = router;
