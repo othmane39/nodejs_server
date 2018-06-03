@@ -20,6 +20,7 @@ app.use('/conversation', conversation_controller);
 var feedback_controller = require('./Feedback/FeedbackController');
 app.use('/feedback', feedback_controller);
 
-
+var kid_controller = require('./Kid/KidController');
+app.use('/kid', kid_controller);
 
 module.exports = app;
